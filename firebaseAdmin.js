@@ -23,7 +23,7 @@ try {
 // Inicializa Firebase Admin con las credenciales y el bucket de Storage
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'cantalab-crm.firebasestorage.app'
+  storageBucket: 'cantalab-usa-crm-704de.firebasestorage.app'
 });
 
 
