@@ -28,6 +28,7 @@ admin.initializeApp({
 
 
 
+
 // Obtén la instancia de Firestore
 const db = admin.firestore();
 
