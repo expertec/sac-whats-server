@@ -10,7 +10,7 @@ import QRCode from 'qrcode-terminal';
 import Pino from 'pino';
 import fs from 'fs';
 import path from 'path';
-import admin from 'firebase-admin';
+import admin from 'firebad-admin';
 import { db } from './firebaseAdmin.js';
 import axios from 'axios';      
 
@@ -302,6 +302,26 @@ export async function sendFullAudioAsDocument(phone, fileUrl) {
     throw err;
   }
 }
+
+// whatsappService.js
+
+export async function sendImageToLead(phone, imageUrl, caption = '') {
+  const sock = getWhatsAppSock();
+  if (!sock) throw new Error('No hay conexión activa con WhatsApp');
+
+  // Normaliza el número a formato internacional
+  let num = String(phone).replace(/\D/g, '');
+  if (num.length === 10) num = '52' + num;
+  const jid = `${num}@s.whatsapp.net`;
+
+  await sock.sendMessage(jid, {
+    image: { url: imageUrl },
+    caption,
+  });
+
+  // (Opcional) Aquí puedes guardar el envío en Firestore si lo deseas
+}
+
 
 export async function sendMessageToLead(phone, messageContent) {
   if (!whatsappSock) {

@@ -12,6 +12,9 @@ import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 import axios from 'axios';
 import os from 'os';               // ← Asegúrate de importar
 
+
+import { sendImageToLead } from './whatsappService.js'; 
+
 import { db, admin } from './firebaseAdmin.js';
 const bucket = admin.storage().bucket();
 
@@ -77,7 +80,20 @@ app.get('/api/whatsapp/number', (req, res) => {
   }
 });
 
-
+// Nuevo endpoint para enviar imagen (comprobante) por WhatsApp
+app.post('/api/whatsapp/send-image', async (req, res) => {
+  const { phone, imageUrl, caption } = req.body;
+  if (!phone || !imageUrl) {
+    return res.status(400).json({ error: 'Falta phone o imageUrl' });
+  }
+  try {
+    await sendImageToLead(phone, imageUrl, caption);
+    return res.json({ success: true });
+  } catch (error) {
+    console.error('Error enviando imagen por WhatsApp:', error);
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 app.post('/api/suno/callback', express.json(), async (req, res) => {
   const raw    = req.body;
