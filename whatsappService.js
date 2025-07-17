@@ -10,7 +10,7 @@ import QRCode from 'qrcode-terminal';
 import Pino from 'pino';
 import fs from 'fs';
 import path from 'path';
-import admin from 'firebad-admin';
+import admin from 'firebase-admin';
 import { db } from './firebaseAdmin.js';
 import axios from 'axios';      
 
