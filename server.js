@@ -3,27 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-
-import multer from 'multer';
-import path from 'path';
-
-
-
-
-
 import { sendImageToLead } from './whatsappService.js'; 
-
-import { db, admin } from './firebaseAdmin.js';
-const bucket = admin.storage().bucket();
-
-
-// Dile a fluent-ffmpeg dónde está el binario
-ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-
-
-
-
-
 
 dotenv.config();
 
@@ -43,7 +23,7 @@ import {
 const app = express();
 const port = process.env.PORT || 3001;
 
-const upload = multer({ dest: path.resolve('./uploads') });
+
 
 app.use(cors());
 app.use(bodyParser.json());
