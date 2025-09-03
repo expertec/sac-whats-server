@@ -13,6 +13,10 @@ import path from 'path';
 import admin from 'firebase-admin';
 import { db } from './firebaseAdmin.js';
 import axios from 'axios';      
+import { fileTypeFromBuffer } from 'file-type'
+import pRetry from 'p-retry'
+import sharp from 'sharp'
+
 
 let latestQR = null;
 let connectionStatus = "Desconectado";
